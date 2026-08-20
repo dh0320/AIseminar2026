@@ -92,7 +92,7 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
   position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
 }
-.top-in{padding:12px 32px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.top-in{padding:12px 32px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:relative}
 .search{position:relative;display:flex;align-items:center;flex:1 1 340px;max-width:460px}
 .search input{
   width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);
@@ -123,6 +123,9 @@ html[data-theme="dark"] .diffbtn[aria-pressed="true"] .pill{background:var(--dif
 }
 .icobtn:hover{border-color:var(--border-2);color:var(--text)}
 .icobtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9}
+.top-actions{display:contents}
+.mobile-more-toggle{display:none}
+.menu-label{display:none}
 
 /* ================= content ================= */
 main{padding:34px 32px 96px;max-width:1500px}
@@ -139,8 +142,8 @@ main{padding:34px 32px 96px;max-width:1500px}
 .gate p{margin:0;font-size:1rem;font-weight:700;line-height:1.8}
 
 .cols{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:26px;align-items:start}
-@media (max-width:1180px){.cols{grid-template-columns:minmax(0,1fr)}}
-@media (min-width:1181px){.cols>.stack:last-child{position:sticky;top:88px}}
+@media (max-width:899px){.cols{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:900px){.step-cols>.stack:last-child{position:sticky;top:88px}}
 .stack{display:flex;flex-direction:column;gap:20px}
 
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
@@ -234,6 +237,25 @@ body.diff-on .task[data-diff]{background:color-mix(in srgb,var(--diff-soft) 60%,
 
 /* mobile fixed navigation */
 .mobile-dock{display:none}
+.mobile-view-tabs{display:none}
+
+/* common rules: key point + details */
+.common-rule-h{width:100%;text-align:left;cursor:pointer}
+.common-rule-h h3{min-width:0}
+.common-chev{
+  width:11px;height:11px;margin-left:2px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);
+  transform:rotate(45deg);transition:transform .18s;flex:none
+}
+.common-rule-h[aria-expanded="true"] .common-chev{transform:rotate(-135deg);margin-top:6px}
+.common-key{padding:17px 22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
+.common-key-label{
+  font-family:var(--mono);font-size:0.6875rem;font-weight:700;letter-spacing:.08em;color:var(--common);
+  background:color-mix(in srgb,var(--common) 11%,transparent);border-radius:6px;padding:3px 8px;margin-top:3px
+}
+.common-key p{margin:0;font-size:1rem;line-height:1.8;color:var(--text);font-weight:650}
+.common-detail{display:none;border-top:1px solid var(--border);background:color-mix(in srgb,var(--surface-2) 42%,transparent)}
+.common-rule-h[aria-expanded="true"]~.common-detail{display:block}
+.common-detail .diff-note{margin-top:0}
 
 /* ================= drawer ================= */
 .scrim{position:fixed;inset:0;background:rgba(12,18,28,.42);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50;backdrop-filter:blur(2px)}
@@ -319,7 +341,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
 .foot{margin-top:44px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:0.875rem;line-height:1.9}
 
 /* ================= responsive ================= */
-@media (max-width:1024px){
+@media (max-width:1180px){
   .desktop-only{display:none!important}
   .app{grid-template-columns:minmax(0,1fr)}
   .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border)}
@@ -336,10 +358,43 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .brand{padding:15px 18px 12px}
   .brand h1{font-size:0.96875rem}
   .stage{min-width:196px}
-  .top-in{padding:11px 18px}
+  .top-in{padding:11px 18px;flex-wrap:nowrap}
+  .search{flex:1 1 auto;min-width:0;max-width:none}
+  .project-top{padding:9px 10px;flex:none}
+  .project-top .pj-label{display:none}
+  .top-actions{
+    display:none;position:absolute;right:18px;top:calc(100% + 6px);z-index:40;width:min(280px,calc(100vw - 36px));
+    padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-lg)
+  }
+  .top-actions.on{display:flex;flex-direction:column;gap:6px}
+  .top-actions .diffbtn,.top-actions .icobtn{
+    width:100%;min-height:44px;height:auto;justify-content:flex-start;box-shadow:none;padding:9px 12px
+  }
+  .top-actions .icobtn{gap:11px}
+  .top-actions .menu-label{display:inline;font-size:0.90625rem;font-weight:700}
+  .mobile-more-toggle{display:flex;flex:none}
   main{padding:24px 18px 70px}
   .hero h2{font-size:1.625rem}
   .lead{font-size:1rem}
+}
+@media (max-width:899px){
+  .mobile-view-tabs{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;position:sticky;top:64px;z-index:25;
+    margin:-6px 0 18px;padding:5px;background:color-mix(in srgb,var(--surface) 94%,transparent);
+    border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow);backdrop-filter:blur(12px)
+  }
+  .mobile-view-tabs button{
+    min-width:0;padding:10px 7px;border-radius:9px;color:var(--muted);font-size:0.84375rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;gap:6px
+  }
+  .mobile-view-tabs button[aria-selected="true"]{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
+  html[data-theme="dark"] .mobile-view-tabs button[aria-selected="true"]{color:#0D131B}
+  .mobile-view-tabs .tab-count{font-family:var(--mono);font-size:0.6875rem;opacity:.82}
+  .step-cols[data-mobile-active="tasks"] .step-left{display:none}
+  .step-cols[data-mobile-active="overview"] .step-right,
+  .step-cols[data-mobile-active="checks"] .step-right{display:none}
+  .step-cols[data-mobile-active="overview"] .pane-checks{display:none}
+  .step-cols[data-mobile-active="checks"] .pane-overview{display:none}
 }
 @media (max-width:560px){
   body{font-size:0.96875rem;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
@@ -354,10 +409,10 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .stage{min-width:180px;padding:9px 10px}
   .hero h2{font-size:1.4375rem}
   .card-h,.grp-h{padding-left:16px;padding-right:16px}
-  .card-b,.grp-b{padding-left:16px;padding-right:16px}
+  .card-b,.grp-b,.common-key{padding-left:16px;padding-right:16px}
   .tasks{padding:4px}
   .drawer-h,.drawer-b{padding-left:18px;padding-right:18px}
-  .search{flex:1 1 100%;max-width:none}
+  .search{min-width:0}
   pre{margin-left:12px;margin-right:12px;padding:14px}
   .mobile-dock{
     position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:45;
@@ -495,7 +550,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <span class="brand-dot">BD</span>
         <h1>新規事業開発<br>プレイブック</h1>
       </div>
-      <div class="sub">v4.5 ／ 2026-08 更新</div>
+      <div class="sub">v4.6 ／ 2026-08 更新</div>
     </div>
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
@@ -523,26 +578,34 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
           <input id="q" type="search" placeholder="タスク・プロンプト・チェック項目を検索" aria-label="検索">
           <button class="clear" id="qclear" hidden aria-label="検索をクリア">&times;</button>
         </div>
-        <button class="diffbtn route" id="routeToggle" aria-pressed="true" title="必須・選択のプロンプトだけに絞って表示する">
-          <span class="track"><span class="knob"></span></span>
-          <span>基本ルート</span>
-        </button>
-        <button class="tbtn" id="pjOpen" title="プロジェクト情報を入力する">
+        <button class="tbtn project-top" id="pjOpen" title="プロジェクト情報を入力する">
           <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H17l3 3v10.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"/><path d="M8 10h8M8 14h5"/></svg>
-          <span>プロジェクト情報</span>
-          <span class="pill" id="pjCount">0/6</span>
+          <span class="pj-label">プロジェクト情報</span>
+          <span class="pill" id="pjCount">0/9</span>
         </button>
-        <button class="diffbtn" id="diffToggle" aria-pressed="false" title="2025年版からの変更点を表示">
-          <span class="track"><span class="knob"></span></span>
-          <span>差分表示</span>
-          <span class="pill" id="diffCount">0</span>
-        </button>
-        <button class="icobtn txt" id="fontBtn" aria-label="文字サイズを変える" title="文字サイズを変える">Aa</button>
-        <button class="icobtn" id="theme" aria-label="表示テーマを切り替え" title="表示テーマを切り替え">
-          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <div class="top-actions" id="topActions" aria-label="表示設定">
+          <button class="diffbtn route" id="routeToggle" aria-pressed="true" title="必須・選択のプロンプトだけに絞って表示する">
+            <span class="track"><span class="knob"></span></span>
+            <span>基本ルート</span>
+          </button>
+          <button class="diffbtn" id="diffToggle" aria-pressed="false" title="2025年版からの変更点を表示">
+            <span class="track"><span class="knob"></span></span>
+            <span>差分表示</span>
+            <span class="pill" id="diffCount">0</span>
+          </button>
+          <button class="icobtn txt" id="fontBtn" aria-label="文字サイズを変える" title="文字サイズを変える">
+            <span class="font-glyph">Aa</span><span class="menu-label">文字サイズ</span>
+          </button>
+          <button class="icobtn" id="theme" aria-label="表示テーマを切り替え" title="表示テーマを切り替え">
+            <svg id="themeIcon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+            <span class="menu-label">テーマ切替</span>
+          </button>
+        </div>
+        <button class="icobtn mobile-more-toggle" id="mobileMore" aria-label="表示設定を開く" aria-expanded="false" aria-controls="topActions" title="表示設定">
+          <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
         </button>
       </div>
-    </header>
+    </header></header>
     <main id="main"></main>
   </div>
 </div>
@@ -1739,6 +1802,12 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 
 /* ---------------- 更新履歴 ---------------- */
 changelog: [
+  { sec: 'v4.6（2026-08-20）の変更', items: [
+    { type:'upd', t:'スマホ表示を「概要／タスク／チェック」の3画面に分割', d:'900px未満では3つの固定タブで表示内容を切り替え、初期表示をタスクにした。既存の画面下部ナビゲーションはそのまま利用できる。', why:'長いチェックリストを通過しなくても、目的のタスクとプロンプトへすぐ移動できるようにするため。' },
+    { type:'upd', t:'共通ルールを「要点＋詳細」に整理', d:'各ルールの最初の項目を要点として常時表示し、残りの説明は必要なときだけ展開できるようにした。内容は削除していない。', why:'全ルールの重要点を短時間で把握しつつ、必要な説明へアクセスできるようにするため。' },
+    { type:'upd', t:'狭い画面の上部操作を1行に集約', d:'1,180px以下では検索・プロジェクト情報・その他メニューの構成にし、基本ルート、差分、文字サイズ、テーマ切替をその他メニューにまとめた。', why:'操作ボタンの折り返しで本文の表示領域が狭くなる問題を防ぐため。' },
+    { type:'upd', t:'PC・タブレットの2列表示範囲を拡大', d:'900px以上ではゴール／チェックとタスク／プロンプトを2列で表示し、1,180px以下ではサイドナビを上部レールに切り替えて横幅を確保した。', why:'小型PCや横向きタブレットでも、チェックとタスクを並べて確認できるようにするため。' }
+  ]},
   { sec: 'v4.5（2026-08-20）の変更', items: [
     { type:'fix', t:'共通ルール内の矛盾を解消', d:'毎回すべての情報を渡すように読める表現を改め、目的と最終判断者を必須としたうえで、タスクに必要な情報だけを選ぶ方針に統一した。数値の根拠も、外部一次情報・社内実測・推計・仮説／目標の種別別に定義した。', why:'不要な情報の混入と、実態に合わない一律の出典要件を防ぐため。' },
     { type:'fix', t:'LP・プレスリリースの事実と引用を保護', d:'確認できない数値や実績を創作せず要確認表示にし、責任者コメントは確認前の案、顧客コメントは提供された実コメントだけを使うようにした。公開前に人が確認すべき項目も一覧化する。', why:'外向け文章に架空の数値・出典・コメントが混ざる事故を防ぐため。' }
@@ -2134,12 +2203,12 @@ var CHECK_LINKS = {
 
 </script>
 <script>
-/* ===== 新規事業開発プレイブック 2026 v4.5 : 画面ロジック ===== */
+/* ===== 新規事業開発プレイブック 2026 v4.6 : 画面ロジック ===== */
 (function () {
   'use strict';
 
   var VIEWS = [DATA.common].concat(DATA.steps);
-  var state = { view: DATA.common.id, checked: {}, open: {}, diff: false, q: '', vals: {}, task: null, route: true };
+  var state = { view: DATA.common.id, checked: {}, open: {}, diff: false, q: '', vals: {}, task: null, route: true, mobileTab: 'tasks' };
   (function markCore() {
     var setC = {};
     CORE_CHECKS.forEach(function (t) { setC[t] = 1; });
@@ -2392,6 +2461,23 @@ var CHECK_LINKS = {
         '<span>次へ</span><span aria-hidden="true">→</span></button>';
   }
 
+  function mobileViewTabs(st) {
+    var t = totals(st);
+    var active = /^(overview|tasks|checks)$/.test(state.mobileTab) ? state.mobileTab : 'tasks';
+    var tabs = [
+      { id: 'overview', label: '概要', meta: '' },
+      { id: 'tasks', label: 'タスク', meta: String(visTasks(st).length) },
+      { id: 'checks', label: 'チェック', meta: t.done + '/' + t.total }
+    ];
+    return '<div class="mobile-view-tabs" role="tablist" aria-label="表示内容">' +
+      tabs.map(function (tab) {
+        var selected = tab.id === active;
+        return '<button role="tab" data-mobile-tab="' + tab.id + '" aria-selected="' + selected + '"' +
+          ' tabindex="' + (selected ? '0' : '-1') + '"><span>' + tab.label + '</span>' +
+          (tab.meta ? '<span class="tab-count">' + tab.meta + '</span>' : '') + '</button>';
+      }).join('') + '</div>';
+  }
+
   /* ---------- common view ---------- */
   function renderCommon() {
     var c = DATA.common;
@@ -2404,11 +2490,18 @@ var CHECK_LINKS = {
     var half = Math.ceil(c.blocks.length / 2);
     c.blocks.forEach(function (b, i) {
       if (i === half) h += '</div><div class="stack">';
-      h += '<section class="card"' + (b.diff ? ' data-diff="' + b.diff + '"' : '') + '>' +
-        '<div class="card-h"><h3>' + esc(b.h) + '</h3><span class="right">' + badge(b.diff) + '</span></div>' +
-        '<div class="card-b">' + note(b.diff, b.was, b.note) +
-        '<ul class="plain">' + b.items.map(function (x) { return '<li><span>' + vars(esc(x)) + '</span></li>'; }).join('') +
-        '</ul></div></section>';
+      var key = 'common:' + i;
+      var opened = state.open[key] === true;
+      var summary = b.items.length ? b.items[0] : (b.note || '');
+      var details = b.items.slice(1);
+      h += '<section class="card common-rule"' + (b.diff ? ' data-diff="' + b.diff + '"' : '') + '>' +
+        '<button class="card-h common-rule-h" data-common-rule="' + key + '" aria-expanded="' + opened + '">' +
+        '<h3>' + esc(b.h) + '</h3><span class="right">' + badge(b.diff) +
+        '<span class="common-chev" aria-hidden="true"></span></span></button>' +
+        '<div class="common-key"><span class="common-key-label">要点</span><p>' + vars(esc(summary)) + '</p></div>' +
+        '<div class="card-b common-detail">' + note(b.diff, b.was, b.note) +
+        (details.length ? '<ul class="plain">' + details.map(function (x) { return '<li><span>' + vars(esc(x)) + '</span></li>'; }).join('') + '</ul>' : '') +
+        '</div></section>';
     });
     h += '</div></div>';
     h += stepnav(0);
@@ -2429,11 +2522,12 @@ var CHECK_LINKS = {
           '／確認は ' + t.total + ' 項目。<button class="linkbtn" data-route="off">発展まで表示</button></p>'
         : '') + '</div>';
 
-    h += '<div class="cols">';
+    h += mobileViewTabs(st);
+    h += '<div class="cols step-cols" data-mobile-active="' + state.mobileTab + '">';
 
     /* left */
-    h += '<div class="stack" style="--c:' + st.color + '">';
-    h += '<section class="card"><div class="card-h"><h3>このステップのゴール</h3></div><div class="card-b">' +
+    h += '<div class="stack step-left" style="--c:' + st.color + '">';
+    h += '<section class="card mobile-pane pane-overview"><div class="card-h"><h3>このステップのゴール</h3></div><div class="card-b">' +
       '<dl class="kv"><dt>GOAL</dt><dd>' + esc(st.goal) + '</dd></dl>' +
       (st.goalAdd ? '<dl class="kv"' + ' data-diff="new"><dt>2026年版で追加</dt><dd>' + badge('new') + ' ' + esc(st.goalAdd) + '</dd></dl>' : '') +
       '<dl class="kv"><dt>OUTPUT</dt><dd>' +
@@ -2444,7 +2538,7 @@ var CHECK_LINKS = {
         }).join(' ') +
       '</dd></dl></div></section>';
 
-    h += '<section class="card"><div class="card-h"><h3>チェックリスト</h3>' +
+    h += '<section class="card mobile-pane pane-checks"><div class="card-h"><h3>チェックリスト</h3>' +
       '<span class="right"><span class="count-badge">' + t.done + ' / ' + t.total + '</span></span></div>' +
       '<p class="chk-hint">項目の横の番号は、そこを埋めるためのプロンプトです。クリックすると開きます。</p>';
     st.checks.forEach(function (g, gi) {
@@ -2473,7 +2567,7 @@ var CHECK_LINKS = {
     h += '</section></div>';
 
     /* right */
-    h += '<div class="stack" style="--c:' + st.color + '">' +
+    h += '<div class="stack step-right mobile-pane pane-tasks" style="--c:' + st.color + '">' +
       '<section class="card"><div class="card-h"><h3>タスクとプロンプト</h3>' +
       '<span class="right" style="font-size:13.5px;color:var(--muted)">クリックで開く</span></div>' +
       '<div class="tasks">';
@@ -2759,6 +2853,19 @@ var CHECK_LINKS = {
     refreshPreviews();
   }
 
+  function closeMobileMenu() {
+    var menu = $('#topActions'), btn = $('#mobileMore');
+    if (menu) menu.classList.remove('on');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
+  function toggleMobileMenu() {
+    var menu = $('#topActions'), btn = $('#mobileMore');
+    if (!menu || !btn) return;
+    var open = !menu.classList.contains('on');
+    menu.classList.toggle('on', open);
+    btn.setAttribute('aria-expanded', String(open));
+  }
+
   var FONT_STEPS = [{ px: '16px', name: '標準' }, { px: '17.5px', name: '大' }, { px: '19px', name: '特大' }];
   var fontIdx = 0;
   function setFont(i) {
@@ -2802,9 +2909,30 @@ var CHECK_LINKS = {
   document.addEventListener('click', function (e) {
     var el;
     if ((el = e.target.closest('[data-copy]'))) { var ck = el.getAttribute('data-copy'); copy(assemble(ck, PROMPTS[ck] || '', false), el); return; }
+    if (e.target.closest('#mobileMore')) { toggleMobileMenu(); return; }
+    if ((el = e.target.closest('[data-mobile-tab]'))) {
+      var tab = el.getAttribute('data-mobile-tab');
+      if (!/^(overview|tasks|checks)$/.test(tab)) return;
+      state.mobileTab = tab;
+      var cols = $('.step-cols');
+      if (cols) cols.setAttribute('data-mobile-active', tab);
+      $$('.mobile-view-tabs [data-mobile-tab]').forEach(function (b) {
+        var selected = b.getAttribute('data-mobile-tab') === tab;
+        b.setAttribute('aria-selected', String(selected));
+        b.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      return;
+    }
+    if ((el = e.target.closest('[data-common-rule]'))) {
+      var commonKey = el.getAttribute('data-common-rule');
+      var commonOpen = el.getAttribute('aria-expanded') === 'true';
+      state.open[commonKey] = !commonOpen;
+      el.setAttribute('aria-expanded', String(!commonOpen));
+      return;
+    }
     if ((el = e.target.closest('[data-task]'))) { var p = el.getAttribute('data-task').split('|'); openTask(p[0], p[1]); return; }
     if ((el = e.target.closest('[data-view]'))) {
-      state.view = el.getAttribute('data-view'); state.q = '';
+      state.view = el.getAttribute('data-view'); state.q = ''; state.mobileTab = 'tasks'; closeMobileMenu();
       $('#q').value = ''; $('#qclear').hidden = true;
       render(); window.scrollTo({ top: 0, behavior: 'smooth' });
       var cur = $('.stage[aria-current="true"]');
@@ -2900,8 +3028,14 @@ var CHECK_LINKS = {
     $('#q').value = ''; state.q = ''; this.hidden = true; render(); $('#q').focus();
   });
 
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#mobileMore')) return;
+    if (!e.target.closest('#topActions') || e.target.closest('#topActions button')) closeMobileMenu();
+  });
+
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
+      if ($('#topActions').classList.contains('on')) { closeMobileMenu(); return; }
       if ($('#pjModal').classList.contains('on')) { closePj(); return; }
       if ($('#logModal').classList.contains('on')) { closeLog(); return; }
       if ($('#drawer').classList.contains('on')) { closeDrawer(); return; }
