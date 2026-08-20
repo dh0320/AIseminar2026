@@ -232,6 +232,9 @@ body.diff-on .task[data-diff]{background:color-mix(in srgb,var(--diff-soft) 60%,
 .navbtn b{font-size:1rem;font-weight:700}
 .navbtn.next{text-align:right;align-items:flex-end}
 
+/* mobile fixed navigation */
+.mobile-dock{display:none}
+
 /* ================= drawer ================= */
 .scrim{position:fixed;inset:0;background:rgba(12,18,28,.42);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50;backdrop-filter:blur(2px)}
 .scrim.on{opacity:1;pointer-events:auto}
@@ -339,7 +342,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .lead{font-size:1rem}
 }
 @media (max-width:560px){
-  body{font-size:0.96875rem}
+  body{font-size:0.96875rem;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
   .top-in{gap:8px}
   .tbtn,.diffbtn{padding:8px 11px;font-size:0.84375rem;gap:7px}
   .tbtn svg{width:15px;height:15px}
@@ -356,6 +359,24 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .drawer-h,.drawer-b{padding-left:18px;padding-right:18px}
   .search{flex:1 1 100%;max-width:none}
   pre{margin-left:12px;margin-right:12px;padding:14px}
+  .mobile-dock{
+    position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:45;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(132px,1.45fr) minmax(0,1fr);gap:6px;
+    padding:6px;background:color-mix(in srgb,var(--surface) 94%,transparent);border:1px solid var(--border);
+    border-radius:16px;box-shadow:var(--shadow-lg);backdrop-filter:blur(14px)
+  }
+  .mobile-dock button{
+    min-width:0;min-height:50px;border-radius:11px;padding:7px 8px;display:flex;align-items:center;justify-content:center;
+    gap:5px;color:var(--text-2);font-size:0.8125rem;font-weight:700;line-height:1.25;white-space:nowrap
+  }
+  .mobile-dock button:not(:disabled):hover{background:var(--surface-2);color:var(--text)}
+  .mobile-dock button:disabled{opacity:.34;cursor:default}
+  .mobile-dock .mobile-prompt{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
+  html[data-theme="dark"] .mobile-dock .mobile-prompt{color:#0D131B}
+  .mobile-dock .mobile-prompt:not(:disabled):hover{background:var(--brand);color:#fff;filter:brightness(1.08)}
+  html[data-theme="dark"] .mobile-dock .mobile-prompt:not(:disabled):hover{color:#0D131B}
+  body.drawer-open .mobile-dock{display:none}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
@@ -442,7 +463,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
   :root{--bg:#fff;--surface:#fff;--surface-2:#fff;--surface-3:#f2f2f2;--text:#000;--text-2:#222;--muted:#555;--border:#bbb;--shadow:none;--shadow-lg:none}
   html[data-theme="dark"]{--bg:#fff;--surface:#fff;--text:#000;--text-2:#222;--muted:#555;--border:#bbb}
   body{font-size:10.5pt}
-  .top,.side,.stepnav,.foot,.scrim,.toast,.modal,.task-arrow{display:none!important}
+  .top,.side,.stepnav,.mobile-dock,.foot,.scrim,.toast,.modal,.task-arrow{display:none!important}
   .app{display:block}
   main{padding:0;max-width:none}
   .cols{grid-template-columns:1fr!important;gap:14px}
@@ -474,7 +495,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <span class="brand-dot">BD</span>
         <h1>新規事業開発<br>プレイブック</h1>
       </div>
-      <div class="sub">v4.3 ／ 2026-08 更新</div>
+      <div class="sub">v4.4 ／ 2026-08 更新</div>
     </div>
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
@@ -526,6 +547,8 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
   </div>
 </div>
 
+<nav class="mobile-dock" id="mobileDock" aria-label="スマートフォン用操作"></nav>
+
 <div class="scrim" id="scrim"></div>
 
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" tabindex="-1">
@@ -557,7 +580,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
       <button class="x" id="pjClose" aria-label="閉じる" style="margin-left:auto">&times;</button>
     </div>
     <div class="modal-b">
-      <p class="hint" style="margin:16px 0 18px">一度入力すると、29本すべてのプロンプトに自動で反映されます。空欄のままでも使えます（その部分は <span style="color:var(--brand);font-weight:700">[ ]</span> のまま残ります）。<br>基準日（今日の日付）は自動で付きます。入力内容はこのページを開いている間だけ保持され、外部には送信されません。機密情報は入れないでください。</p>
+      <p class="hint" style="margin:16px 0 18px">一度入力すると、29本すべてのプロンプトに自動で反映されます。空欄のままでも使えます（その部分は <span style="color:var(--brand);font-weight:700">[ ]</span> のまま残ります）。<br>基準日（今日の日付）は自動で付きます。入力内容はこの端末のブラウザに自動保存され、外部には送信されません。共有端末では利用後に「すべて消去」してください。機密情報は入れないでください。</p>
       <div id="pjForm"></div>
     </div>
     <div class="modal-f">
@@ -1708,6 +1731,10 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 
 /* ---------------- 更新履歴 ---------------- */
 changelog: [
+  { sec: 'v4.4（2026-08-20）の変更', items: [
+    { type:'new', t:'チェック状況とプロジェクト情報を自動保存', d:'チェックリストの進捗と9項目のプロジェクト共通情報を、この端末のブラウザに自動保存する。再読み込みやブラウザを閉じたあとも続きから再開できる。保存データは外部へ送信しない。', why:'セミナー中の誤操作やページ再読み込みで、それまでの入力と進捗が消える問題を防ぐため。' },
+    { type:'new', t:'スマートフォン用の固定操作バーを追加', d:'スマートフォン画面の下部に「前へ」「プロンプトを開く」「次へ」を固定表示する。現在の工程で最後に開いたタスクを優先して再度開ける。', why:'長いページをスクロールしたあとでも、工程移動とプロンプト表示を片手で行えるようにするため。' }
+  ]},
   { sec: 'v4.3（2026-08-19）の変更', items: [
     { type:'upd', t:'2025年的な言い回しが残っていた3本のプロンプトを改訂', d:'1-4「課題からソリューション案を立案」「技術シーズからニーズへ繋ぐ」と、2-3「ペルソナ設定」から「時間をかけても良いので、品質の高い回答を生成してください」を削除した。1-4の1本目は、AIによる100点満点の自己採点をやめ、表の列に「この案が成立するために必要な前提」「最も強い点」「最も弱い点」を追加。あわせて、5案の解決原理が互いに異なることを出力ルールで求めるようにした。', why:'共通ルール①で「差がつくのは言い回しではなく渡すコンテキスト」と書きながら、プロンプト本文が2025年のままだった。とくに自己採点は、AIが自分の出力を採点しても検証にならず、人が評価軸と配点を先に固定する1-5のスクリーニングと方針が食い違っていた。追加した3列は、そのまま1-4の陳腐化テストと1-5に渡せる。' }
   ]},
@@ -2095,7 +2122,7 @@ var CHECK_LINKS = {
 
 </script>
 <script>
-/* ===== 新規事業開発プレイブック 2026 v3 : 画面ロジック ===== */
+/* ===== 新規事業開発プレイブック 2026 v4.4 : 画面ロジック ===== */
 (function () {
   'use strict';
 
@@ -2187,6 +2214,55 @@ var CHECK_LINKS = {
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
+  /* ---------- local save ---------- */
+  var STORAGE_KEY = 'bd-playbook-2026-state-v1';
+  var VALID_CHECKS = {};
+  DATA.steps.forEach(function (st) {
+    st.checks.forEach(function (g, gi) {
+      g.items.forEach(function (it, ii) { VALID_CHECKS[st.id + ':' + gi + ':' + ii] = true; });
+    });
+  });
+  var saveTimer;
+  function restoreSavedState() {
+    try {
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      if (!saved || typeof saved !== 'object') return;
+      if (saved.checked && typeof saved.checked === 'object') {
+        Object.keys(saved.checked).forEach(function (k) {
+          if (VALID_CHECKS[k] && saved.checked[k]) state.checked[k] = true;
+        });
+      }
+      if (saved.vals && typeof saved.vals === 'object') {
+        COMMON_KEYS.forEach(function (k) {
+          if (typeof saved.vals[k] === 'string') state.vals[k] = saved.vals[k];
+        });
+      }
+    } catch (err) {
+      /* localStorage が使えない環境でも、ページ内では通常どおり利用できる */
+    }
+  }
+  function saveState() {
+    clearTimeout(saveTimer);
+    var checked = {}, vals = {};
+    Object.keys(state.checked).forEach(function (k) {
+      if (VALID_CHECKS[k] && state.checked[k]) checked[k] = true;
+    });
+    COMMON_KEYS.forEach(function (k) {
+      if (typeof state.vals[k] === 'string' && state.vals[k]) vals[k] = state.vals[k];
+    });
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, checked: checked, vals: vals }));
+    } catch (err) {
+      /* 保存に失敗しても入力やチェック操作は止めない */
+    }
+  }
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveState, 180);
+  }
+
   var DIFF_LABEL = { 'new': '新規追加', 'upd': '変更', 'fix': '不具合修正' };
   var DIFF_TEXT = { 'new': 'NEW', 'upd': '更新', 'fix': '修正' };
   var DIFF_CLS = { 'new': 'b-new', 'upd': 'b-upd', 'fix': 'b-fix' };
@@ -2270,6 +2346,38 @@ var CHECK_LINKS = {
         '<span class="stage-nm">' + esc(v.short || v.name) + '</span>' +
         '<span class="stage-mt">' + esc(meta) + '</span></span></button>';
     }).join('');
+  }
+
+  function currentViewIndex() {
+    var idx = 0;
+    VIEWS.forEach(function (v, i) { if (v.id === state.view) idx = i; });
+    return idx;
+  }
+  function mobilePromptTarget(view) {
+    var st = view && view.kind === 'step' ? view : VIEWS.filter(function (v) { return v.kind === 'step'; })[0];
+    if (!st) return null;
+    var tasks = visTasks(st);
+    if (!tasks.length) return null;
+    if (state.task && state.task.st.id === st.id) {
+      var last = tasks.filter(function (tk) { return tk.id === state.task.tk.id; })[0];
+      if (last) return { st: st, tk: last };
+    }
+    return { st: st, tk: tasks[0] };
+  }
+  function renderMobileDock() {
+    var dock = $('#mobileDock');
+    if (!dock) return;
+    var idx = currentViewIndex();
+    var view = VIEWS[idx], prev = VIEWS[idx - 1], next = VIEWS[idx + 1];
+    var target = mobilePromptTarget(view);
+    dock.innerHTML =
+      '<button' + (prev ? ' data-view="' + prev.id + '" aria-label="前の工程：' + esc(prev.short || prev.name) + '"' : ' disabled') + '>' +
+        '<span aria-hidden="true">←</span><span>前へ</span></button>' +
+      '<button class="mobile-prompt"' + (target
+        ? ' data-task="' + target.st.id + '|' + target.tk.id + '" aria-label="プロンプトを開く：' + esc(target.tk.title) + '"'
+        : ' disabled') + '><span>プロンプトを開く</span></button>' +
+      '<button' + (next ? ' data-view="' + next.id + '" aria-label="次の工程：' + esc(next.short || next.name) + '"' : ' disabled') + '>' +
+        '<span>次へ</span><span aria-hidden="true">→</span></button>';
   }
 
   /* ---------- common view ---------- */
@@ -2380,7 +2488,7 @@ var CHECK_LINKS = {
     if (next) h += '<button class="navbtn next" data-view="' + next.id + '"><span>次の工程 →</span><b>' + esc(next.short || next.name) + '</b></button>';
     h += '</div>';
     h += '<div class="foot">ショートカット： <span class="kbd">/</span> 検索　<span class="kbd">Esc</span> 閉じる　' +
-      'チェックの進捗はこのページを開いている間だけ保持されます（リロードでリセット）。</div>';
+      'チェックの進捗とプロジェクト情報は、この端末のブラウザに自動保存されます。</div>';
     return h;
   }
 
@@ -2415,10 +2523,10 @@ var CHECK_LINKS = {
   /* ---------- render ---------- */
   function render() {
     renderRail();
+    renderMobileDock();
     var m = $('#main');
     if (state.q) { m.innerHTML = renderSearch(state.q); return; }
-    var idx = 0;
-    VIEWS.forEach(function (v, i) { if (v.id === state.view) idx = i; });
+    var idx = currentViewIndex();
     var v = VIEWS[idx];
     m.innerHTML = v.kind === 'common' ? renderCommon() : renderStep(v, idx);
   }
@@ -2513,6 +2621,7 @@ var CHECK_LINKS = {
     var tk = st.tasks.filter(function (x) { return x.id === taskId; })[0];
     if (!tk) return;
     state.task = { st: st, tk: tk };
+    renderMobileDock();
     var d = $('#drawer');
     d.style.setProperty('--c', st.color);
     $('#drawerEyebrow').textContent = st.no + ' ／ ' + st.name;
@@ -2615,6 +2724,7 @@ var CHECK_LINKS = {
     var k = el.getAttribute('data-val');
     state.vals[k] = el.value;
     $$('[data-val="' + k + '"]').forEach(function (o) { if (o !== el && o.value !== el.value) o.value = el.value; });
+    if (COMMON_KEYS.indexOf(k) >= 0) scheduleSave();
     clearTimeout(previewTimer);
     previewTimer = setTimeout(refreshPreviews, 110);
   });
@@ -2633,6 +2743,7 @@ var CHECK_LINKS = {
   function closePj() {
     $('#pjModal').classList.remove('on');
     if (!$('#drawer').classList.contains('on') && !$('#logModal').classList.contains('on')) $('#scrim').classList.remove('on');
+    saveState();
     refreshPreviews();
   }
 
@@ -2703,6 +2814,7 @@ var CHECK_LINKS = {
       if (window.confirm('入力したプロジェクト情報をすべて消去しますか？')) {
         COMMON_FIELDS.forEach(function (f) { delete state.vals[f.k]; });
               $$('#pjForm [data-val]').forEach(function (i) { i.value = state.vals[i.getAttribute('data-val')] || ''; });
+        saveState();
         refreshPreviews();
         toast('プロジェクト情報を消去しました');
       }
@@ -2715,7 +2827,7 @@ var CHECK_LINKS = {
     if (e.target.closest('#logClose')) { closeLog(); return; }
     if (e.target === $('#logModal')) { closeLog(); return; }
     if (e.target.closest('#reset')) {
-      state.checked = {}; render(); toast('チェックをリセットしました'); return;
+      state.checked = {}; saveState(); render(); toast('チェックをリセットしました'); return;
     }
     if (e.target.closest('#theme')) {
       var cur2 = document.documentElement.getAttribute('data-theme');
@@ -2728,6 +2840,7 @@ var CHECK_LINKS = {
     if (!c) return;
     var id = c.getAttribute('data-chk');
     if (c.checked) state.checked[id] = true; else delete state.checked[id];
+    saveState();
     var st = VIEWS.filter(function (x) { return x.id === state.view; })[0];
     if (st && st.kind === 'step') {
       st.checks.forEach(function (g, gi) {
@@ -2787,6 +2900,7 @@ var CHECK_LINKS = {
   });
 
   /* ---------- boot ---------- */
+  restoreSavedState();
   try {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
     else setTheme('light');
@@ -2796,6 +2910,7 @@ var CHECK_LINKS = {
   setFont(0);
   updatePjBtn();
   render();
+  window.addEventListener('pagehide', saveState);
 })();
 
 </script>
