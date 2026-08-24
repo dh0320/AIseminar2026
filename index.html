@@ -81,7 +81,7 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
 .side-foot{margin-top:auto;padding:16px 22px 22px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px}
 .ghost{
   display:flex;align-items:center;gap:9px;font-size:0.875rem;color:var(--text-2);
-  padding:9px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface);transition:.13s;
+  padding:9px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface);transition:.13s;text-decoration:none;
 }
 .ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-2)}
 .ghost{white-space:nowrap}
@@ -550,7 +550,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <span class="brand-dot">BD</span>
         <h1>新規事業開発<br>プレイブック</h1>
       </div>
-      <div class="sub">v4.6 ／ 2026-08 更新</div>
+      <div class="sub">v4.7 ／ 2026-08 更新</div>
     </div>
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
@@ -559,10 +559,10 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
         更新履歴を見る
       </button>
-      <button class="ghost desktop-only" id="printBtn">
-        <svg viewBox="0 0 24 24"><path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="7" rx="2"/><path d="M7 14h10v6H7z"/></svg>
-        印刷 / PDF保存
-      </button>
+      <a class="ghost" href="https://toy-delta-lab-2026.protoplay.chatgpt.site/howto" target="_blank" rel="noopener noreferrer" aria-label="検討プロセスを別タブで開く">
+        <svg viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
+        検討プロセスを見る
+      </a>
       <button class="ghost" id="reset">
         <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
         チェックをリセット
@@ -1802,6 +1802,9 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 
 /* ---------------- 更新履歴 ---------------- */
 changelog: [
+  { sec: 'v4.7（2026-08-24）の変更', items: [
+    { type:'upd', t:'検討プロセスのプレビューリンクを追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、今回のおもちゃ企画でAIと人が検討を進めた過程を別タブで確認できるリンクへ置き換えた。', why:'プレイブックの使い方だけでなく、実際の検討と意思決定の往復を具体例として参照できるようにするため。' }
+  ]},
   { sec: 'v4.6（2026-08-20）の変更', items: [
     { type:'upd', t:'スマホ表示を「概要／タスク／チェック」の3画面に分割', d:'900px未満では3つの固定タブで表示内容を切り替え、初期表示をタスクにした。既存の画面下部ナビゲーションはそのまま利用できる。', why:'長いチェックリストを通過しなくても、目的のタスクとプロンプトへすぐ移動できるようにするため。' },
     { type:'upd', t:'共通ルールを「要点＋詳細」に整理', d:'各ルールの最初の項目を要点として常時表示し、残りの説明は必要なときだけ展開できるようにした。内容は削除していない。', why:'全ルールの重要点を短時間で把握しつつ、必要な説明へアクセスできるようにするため。' },
@@ -2203,7 +2206,7 @@ var CHECK_LINKS = {
 
 </script>
 <script>
-/* ===== 新規事業開発プレイブック 2026 v4.6 : 画面ロジック ===== */
+/* ===== 新規事業開発プレイブック 2026 v4.7 : 画面ロジック ===== */
 (function () {
   'use strict';
 
@@ -2962,7 +2965,6 @@ var CHECK_LINKS = {
     }
     if ((el = e.target.closest('[data-route]'))) { setRoute(false); toast('すべての項目を表示しています'); return; }
     if (e.target.closest('#fontBtn')) { setFont(fontIdx + 1); toast('文字サイズ：' + FONT_STEPS[fontIdx].name); return; }
-    if (e.target.closest('#printBtn')) { window.print(); return; }
     if (e.target.closest('#openLog')) { openLog(); return; }
     if (e.target.closest('#logClose')) { closeLog(); return; }
     if (e.target === $('#logModal')) { closeLog(); return; }
