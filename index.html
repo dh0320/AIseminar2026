@@ -79,6 +79,8 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
 .stage-nm{display:block;font-size:0.9375rem;font-weight:700;line-height:1.45;margin-top:1px}
 .stage-mt{display:block;font-size:0.78125rem;color:var(--muted);line-height:1.5;margin-top:1px}
 .side-foot{margin-top:auto;padding:16px 22px 22px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px}
+.side-actions,.preview-actions{display:flex;flex-direction:column;gap:9px}
+.preview-actions{margin-top:4px;padding-top:13px;border-top:1px solid var(--border)}
 .ghost{
   display:flex;align-items:center;gap:9px;font-size:0.875rem;color:var(--text-2);
   padding:9px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface);transition:.13s;text-decoration:none;
@@ -361,7 +363,10 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .stage{flex:none;min-width:210px;border:1px solid var(--border);background:var(--surface)}
   .stage[aria-current="true"]{border-color:var(--c);background:var(--surface-2)}
   .stage[aria-current="true"]::before{display:none}
-  .side-foot{flex-direction:row;padding:0 18px 12px;border-top:0;margin-top:0;gap:8px}
+  .side-foot{flex-direction:column;padding:0 18px 12px;border-top:0;margin-top:0;gap:8px}
+  .side-actions{flex-direction:row;gap:8px}
+  .preview-actions{margin-top:0;padding-top:8px}
+  .preview-actions .ghost{width:100%}
   .ghost{flex:1;justify-content:center;padding:9px 10px;font-size:0.84375rem}
   .preview-status{display:none}
   .brand{padding:15px 18px 12px}
@@ -564,19 +569,23 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
     <div class="side-foot">
-      <button class="ghost" id="openLog">
-        <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
-        更新履歴を見る
-      </button>
-      <button class="ghost process-preview" id="processPreview" type="button" disabled aria-disabled="true" aria-label="検討プロセスは講義後に公開します">
-        <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        <span>検討プロセスを見る</span>
-        <span class="preview-status">講義後公開</span>
-      </button>
-      <button class="ghost" id="reset">
-        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
-        チェックをリセット
-      </button>
+      <div class="side-actions">
+        <button class="ghost" id="openLog">
+          <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+          更新履歴を見る
+        </button>
+        <button class="ghost" id="reset">
+          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          チェックをリセット
+        </button>
+      </div>
+      <div class="preview-actions">
+        <button class="ghost process-preview" id="processPreview" type="button" disabled aria-disabled="true" aria-label="検討プロセスは講義後に公開します">
+          <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span>検討プロセスを見る</span>
+          <span class="preview-status">講義後公開</span>
+        </button>
+      </div>
     </div>
   </aside>
 
