@@ -86,6 +86,14 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
 .ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-2)}
 .ghost{white-space:nowrap}
 .ghost svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9}
+.preview-status{
+  margin-left:auto;padding:2px 6px;border-radius:999px;background:var(--surface-3);
+  color:var(--muted);font-family:var(--mono);font-size:0.65625rem;font-weight:700;letter-spacing:.04em;
+}
+.process-preview:disabled{
+  color:var(--muted);background:var(--surface-2);border-color:var(--border);opacity:.62;cursor:not-allowed;
+}
+.process-preview:disabled:hover{color:var(--muted);background:var(--surface-2);border-color:var(--border)}
 
 /* ================= topbar ================= */
 .top{
@@ -355,6 +363,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .stage[aria-current="true"]::before{display:none}
   .side-foot{flex-direction:row;padding:0 18px 12px;border-top:0;margin-top:0;gap:8px}
   .ghost{flex:1;justify-content:center;padding:9px 10px;font-size:0.84375rem}
+  .preview-status{display:none}
   .brand{padding:15px 18px 12px}
   .brand h1{font-size:0.96875rem}
   .stage{min-width:196px}
@@ -559,10 +568,11 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
         更新履歴を見る
       </button>
-      <a class="ghost" href="https://toy-delta-lab-2026.protoplay.chatgpt.site/howto" target="_blank" rel="noopener noreferrer" aria-label="検討プロセスを別タブで開く">
-        <svg viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
-        検討プロセスを見る
-      </a>
+      <button class="ghost process-preview" id="processPreview" type="button" disabled aria-disabled="true" aria-label="検討プロセスは講義後に公開します">
+        <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span>検討プロセスを見る</span>
+        <span class="preview-status">講義後公開</span>
+      </button>
       <button class="ghost" id="reset">
         <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
         チェックをリセット
@@ -1803,7 +1813,7 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 /* ---------------- 更新履歴 ---------------- */
 changelog: [
   { sec: 'v4.7（2026-08-24）の変更', items: [
-    { type:'upd', t:'検討プロセスのプレビューリンクを追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、今回のおもちゃ企画でAIと人が検討を進めた過程を別タブで確認できるリンクへ置き換えた。', why:'プレイブックの使い方だけでなく、実際の検討と意思決定の往復を具体例として参照できるようにするため。' }
+    { type:'upd', t:'講義後に公開する検討プロセス導線を追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、検討プロセスのプレビュー導線へ置き換えた。講義前はグレーアウトして無効化し、講義後に設定1か所で公開できる状態にした。', why:'講義中のネタバレを防ぎつつ、終了後は参加者が実際の検討と意思決定の往復を参照できるようにするため。' }
   ]},
   { sec: 'v4.6（2026-08-20）の変更', items: [
     { type:'upd', t:'スマホ表示を「概要／タスク／チェック」の3画面に分割', d:'900px未満では3つの固定タブで表示内容を切り替え、初期表示をタスクにした。既存の画面下部ナビゲーションはそのまま利用できる。', why:'長いチェックリストを通過しなくても、目的のタスクとプロンプトへすぐ移動できるようにするため。' },
@@ -2209,6 +2219,12 @@ var CHECK_LINKS = {
 /* ===== 新規事業開発プレイブック 2026 v4.7 : 画面ロジック ===== */
 (function () {
   'use strict';
+
+  /* 講義後は enabled を true にするだけで、検討プロセスへのリンクが有効になります。 */
+  var PROCESS_PREVIEW = {
+    enabled: false,
+    url: 'https://toy-delta-lab-2026.protoplay.chatgpt.site/howto'
+  };
 
   var VIEWS = [DATA.common].concat(DATA.steps);
   var state = { view: DATA.common.id, checked: {}, open: {}, diff: false, q: '', vals: {}, task: null, route: true, mobileTab: 'tasks' };
@@ -2784,6 +2800,16 @@ var CHECK_LINKS = {
     if (!$('#logModal').classList.contains('on')) $('#scrim').classList.remove('on');
   }
   function openLog() { $('#logModal').classList.add('on'); $('#scrim').classList.add('on'); $('.modal-b').scrollTop = 0; }
+  function configureProcessPreview() {
+    var btn = $('#processPreview');
+    if (!btn) return;
+    var disabled = !PROCESS_PREVIEW.enabled;
+    btn.disabled = disabled;
+    btn.setAttribute('aria-disabled', String(disabled));
+    btn.setAttribute('aria-label', disabled ? '検討プロセスは講義後に公開します' : '検討プロセスを別タブで開く');
+    var status = btn.querySelector('.preview-status');
+    if (status) status.textContent = disabled ? '講義後公開' : '公開中';
+  }
   function closeLog() {
     $('#logModal').classList.remove('on');
     if (!$('#drawer').classList.contains('on')) $('#scrim').classList.remove('on');
@@ -2965,6 +2991,10 @@ var CHECK_LINKS = {
     }
     if ((el = e.target.closest('[data-route]'))) { setRoute(false); toast('すべての項目を表示しています'); return; }
     if (e.target.closest('#fontBtn')) { setFont(fontIdx + 1); toast('文字サイズ：' + FONT_STEPS[fontIdx].name); return; }
+    if (e.target.closest('#processPreview') && PROCESS_PREVIEW.enabled) {
+      window.open(PROCESS_PREVIEW.url, '_blank', 'noopener,noreferrer');
+      return;
+    }
     if (e.target.closest('#openLog')) { openLog(); return; }
     if (e.target.closest('#logClose')) { closeLog(); return; }
     if (e.target === $('#logModal')) { closeLog(); return; }
@@ -3056,6 +3086,7 @@ var CHECK_LINKS = {
   buildIndex();
   renderLog();
   setFont(0);
+  configureProcessPreview();
   updatePjBtn();
   render();
   window.addEventListener('pagehide', saveState);
