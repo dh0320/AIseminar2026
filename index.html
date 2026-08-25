@@ -143,6 +143,15 @@ main{padding:34px 32px 96px;max-width:1500px}
 .crumb{font-family:var(--mono);font-size:0.75rem;letter-spacing:.13em;color:var(--c);font-weight:700}
 .hero h2{margin:9px 0 0;font-size:2.0625rem;line-height:1.32;letter-spacing:-.01em;font-weight:700}
 .lead{margin:14px 0 0;font-size:1.0625rem;line-height:1.85;color:var(--text-2);max-width:70ch}
+.quickstart{margin-top:22px;padding:18px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--c);border-radius:0 var(--r) var(--r) 0;box-shadow:var(--shadow)}
+.quickstart-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.quickstart-h span{font-family:var(--mono);font-size:0.6875rem;letter-spacing:.12em;color:var(--c);font-weight:700}
+.quickstart-h b{font-size:1rem}
+.quickstart-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.quickstart-step{min-width:0;padding:12px 13px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px}
+.quickstart-step .num{display:block;font-family:var(--mono);font-size:0.6875rem;letter-spacing:.08em;color:var(--c);font-weight:700;margin-bottom:5px}
+.quickstart-step strong{display:block;font-size:0.9375rem;line-height:1.45;margin-bottom:4px}
+.quickstart-step p{margin:0;color:var(--text-2);font-size:0.8125rem;line-height:1.65}
 .gate{
   margin-top:20px;display:flex;gap:14px;align-items:flex-start;max-width:860px;
   background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--c);
@@ -392,6 +401,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .lead{font-size:1rem}
 }
 @media (max-width:899px){
+  .quickstart-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mobile-view-tabs{
     display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;position:sticky;top:64px;z-index:25;
     margin:-6px 0 18px;padding:5px;background:color-mix(in srgb,var(--surface) 94%,transparent);
@@ -422,6 +432,8 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
   .brand{padding:13px 18px 10px}
   .stage{min-width:180px;padding:9px 10px}
   .hero h2{font-size:1.4375rem}
+  .quickstart{padding:15px}
+  .quickstart-steps{grid-template-columns:minmax(0,1fr)}
   .card-h,.grp-h{padding-left:16px;padding-right:16px}
   .card-b,.grp-b,.common-key{padding-left:16px;padding-right:16px}
   .tasks{padding:4px}
@@ -564,7 +576,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <span class="brand-dot">BD</span>
         <h1>新規事業開発<br>プレイブック</h1>
       </div>
-      <div class="sub">v4.7 ／ 2026-08 更新</div>
+      <div class="sub">v4.8 ／ 2026-08 更新</div>
     </div>
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
@@ -682,6 +694,12 @@ const DATA = {
 common: {
   id: 'common', kind: 'common', no: 'BASE', name: '共通ルール', color: 'var(--common)',
   lead: 'このサイトは、新規事業の検討でそのまま使えるプロンプト集です。判断ゲートとチェックリストは、プロンプトを使う順番と、使い終わりの目安として置いています。検討の記録や意思決定そのものは、各社の様式で別に残してください。4ステップの骨格は2025年版から変えていません。変わったのは「AIへの渡し方」と「出てきたものの検品」です。',
+  usage: [
+    { t: '前提を入力', d: '右上の「プロジェクト情報」に、目的・判断者・事業の概要を入力します。' },
+    { t: '基本ルートを進む', d: 'STEP 1から順に開き、まずは「必須」と「選択」のプロンプトを使います。' },
+    { t: 'AIで実行', d: '必要な入力欄を埋め、できたプロンプトをコピーしてAIに渡します。' },
+    { t: '人が検品', d: '出典・仮説・一次情報を確認し、チェック項目で抜けを点検します。' }
+  ],
   blocks: [
     {
       h: '① 「効くプロンプト」から「渡す情報の設計」へ',
@@ -1821,6 +1839,9 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 
 
 changelog: [
+  { sec: 'v4.8（2026-08-25）の変更', items: [
+    { type:'new', t:'共通ルールの冒頭に使い方を追加', d:'前提入力、基本ルート、AIでの実行、人による検品の4ステップを、共通ルールの見出し直下に表示した。', why:'初めて開いた受講者が、どこから始めて何をすればよいかを画面内だけで理解できるようにするため。' }
+  ]},
   { sec: 'v4.7（2026-08-24）の変更', items: [
     { type:'upd', t:'講義後に公開する検討プロセス導線を追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、検討プロセスのプレビュー導線へ置き換えた。講義前はグレーアウトし、講義後に公開する。', why:'講義中のネタバレを防ぎつつ、終了後は参加者が実際の検討と意思決定の往復を参照できるようにするため。' }
   ]},
@@ -2503,7 +2524,13 @@ var CHECK_LINKS = {
     var h = '<div class="hero" style="--c:' + c.color + '">' +
       '<span class="crumb">' + esc(c.no) + ' ／ 全工程の前提</span>' +
       '<h2>' + esc(c.name) + '</h2>' +
-      '<p class="lead">' + esc(c.lead) + '</p></div>';
+      '<p class="lead">' + esc(c.lead) + '</p>' +
+      '<section class="quickstart" aria-labelledby="quickstart-title"><div class="quickstart-h">' +
+      '<span>QUICK START</span><b id="quickstart-title">プレイブックの使い方</b></div>' +
+      '<ol class="quickstart-steps">' + c.usage.map(function (item, i) {
+        return '<li class="quickstart-step"><span class="num">0' + (i + 1) + '</span>' +
+          '<strong>' + esc(item.t) + '</strong><p>' + esc(item.d) + '</p></li>';
+      }).join('') + '</ol></section></div>';
 
     h += '<div class="cols" style="--c:' + c.color + '"><div class="stack">';
     var half = Math.ceil(c.blocks.length / 2);
@@ -2666,7 +2693,7 @@ var CHECK_LINKS = {
   function extrasFor(pk) {
     var seen = {}, out = [];
     (PROMPT_MAP[pk] || []).forEach(function (e) {
-      if (e.length < 5) return;              // 共通項目はフォームに出さない
+      if (e.length < 5) return;
       if (seen[e[1]]) return;
       seen[e[1]] = 1;
       out.push({ k: e[1], label: e[2], ph: e[3], long: e[4] });
