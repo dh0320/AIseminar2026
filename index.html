@@ -42,7 +42,7 @@ input{font:inherit}
 a{color:var(--brand)}
 :focus-visible{outline:2.5px solid var(--brand);outline-offset:2px;border-radius:6px}
 
-/* ================= app shell ================= */
+
 .app{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
 .side{
   background:var(--surface);border-right:1px solid var(--border);
@@ -97,7 +97,7 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
 }
 .process-preview:disabled:hover{color:var(--muted);background:var(--surface-2);border-color:var(--border)}
 
-/* ================= topbar ================= */
+
 .top{
   position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
@@ -137,7 +137,7 @@ html[data-theme="dark"] .diffbtn[aria-pressed="true"] .pill{background:var(--dif
 .mobile-more-toggle{display:none}
 .menu-label{display:none}
 
-/* ================= content ================= */
+
 main{padding:34px 32px 96px;max-width:1500px}
 .hero{margin-bottom:28px}
 .crumb{font-family:var(--mono);font-size:0.75rem;letter-spacing:.13em;color:var(--c);font-weight:700}
@@ -170,7 +170,7 @@ main{padding:34px 32px 96px;max-width:1500px}
 .card-b ul.plain li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c);flex:none;margin-top:11px}
 .chip-out{display:inline-flex;align-items:center;gap:7px;font-size:0.90625rem;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 12px}
 
-/* checklist */
+
 .grp{border-top:1px solid var(--border)}
 .grp:first-of-type{border-top:0}
 .grp-h{width:100%;display:flex;align-items:center;gap:12px;padding:15px 22px;text-align:left;font-size:0.96875rem;font-weight:700;transition:background .12s}
@@ -197,7 +197,7 @@ html[data-theme="dark"] .chk input:checked::after{border-color:#0D131B}
 .chk-w{min-width:0}
 .chk label{cursor:pointer}
 
-/* tasks */
+
 .tasks{display:flex;flex-direction:column;padding:6px}
 .task{
   width:100%;text-align:left;display:block;padding:16px 18px;border-radius:10px;
@@ -215,7 +215,7 @@ html[data-theme="dark"] .task-n{color:#0D131B}
 .task-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem;transition:transform .15s}
 .task:hover .task-arrow{transform:translateY(-50%) translateX(3px);color:var(--c)}
 
-/* badges & diff */
+
 .badge{font-family:var(--mono);font-size:0.65625rem;font-weight:700;letter-spacing:.08em;padding:2.5px 7px;border-radius:5px;line-height:1.4;white-space:nowrap;flex:none;display:inline-block}
 .b-new{background:var(--diff);color:#fff}
 .b-upd{background:#1E64C8;color:#fff}
@@ -234,7 +234,7 @@ body:not(.diff-on) .diff-note{display:none}
 body.diff-on .chk[data-diff]{background:var(--diff-soft)}
 body.diff-on .task[data-diff]{background:color-mix(in srgb,var(--diff-soft) 60%,transparent)}
 
-/* step nav */
+
 .stepnav{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
 .navbtn{
   display:flex;flex-direction:column;gap:2px;flex:1 1 240px;text-align:left;padding:15px 20px;
@@ -245,11 +245,11 @@ body.diff-on .task[data-diff]{background:color-mix(in srgb,var(--diff-soft) 60%,
 .navbtn b{font-size:1rem;font-weight:700}
 .navbtn.next{text-align:right;align-items:flex-end}
 
-/* mobile fixed navigation */
+
 .mobile-dock{display:none}
 .mobile-view-tabs{display:none}
 
-/* common rules: key point + details */
+
 .common-rule-h{width:100%;text-align:left;cursor:pointer}
 .common-rule-h h3{min-width:0}
 .common-chev{
@@ -267,7 +267,7 @@ body.diff-on .task[data-diff]{background:color-mix(in srgb,var(--diff-soft) 60%,
 .common-rule-h[aria-expanded="true"]~.common-detail{display:block}
 .common-detail .diff-note{margin-top:0}
 
-/* ================= drawer ================= */
+
 .scrim{position:fixed;inset:0;background:rgba(12,18,28,.42);opacity:0;pointer-events:none;transition:opacity .22s;z-index:50;backdrop-filter:blur(2px)}
 .scrim.on{opacity:1;pointer-events:auto}
 .drawer{
@@ -308,7 +308,7 @@ pre::-webkit-scrollbar{height:9px}
 pre::-webkit-scrollbar-thumb{background:#3A4756;border-radius:5px}
 .var{color:var(--code-var);font-weight:600}
 
-/* ================= search results ================= */
+
 .res-h{font-size:0.9375rem;color:var(--muted);margin:0 0 18px}
 .res-list{display:flex;flex-direction:column;gap:10px;max-width:960px}
 .res{
@@ -322,7 +322,7 @@ pre::-webkit-scrollbar-thumb{background:#3A4756;border-radius:5px}
 mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;border-radius:4px;padding:1px 3px;font-weight:700}
 .empty{color:var(--muted);font-size:1rem}
 
-/* ================= modal ================= */
+
 .modal{position:fixed;z-index:70;inset:0;display:none;align-items:flex-start;justify-content:center;padding:5vh 20px 20px}
 .modal.on{display:flex}
 .modal-box{background:var(--surface);border-radius:16px;width:min(940px,100%);max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg)}
@@ -340,7 +340,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
 .cl .why::before{content:"なぜ";font-family:var(--mono);font-size:0.6875rem;letter-spacing:.1em;color:var(--diff);border:1px solid var(--diff-line);border-radius:5px;padding:1px 6px;margin-right:8px}
 .srcs{display:flex;flex-direction:column;gap:9px;font-size:0.9375rem}
 
-/* ================= toast ================= */
+
 .toast{
   position:fixed;left:50%;bottom:34px;transform:translate(-50%,16px);z-index:80;
   background:var(--text);color:var(--bg);font-size:0.9375rem;font-weight:700;padding:13px 26px;border-radius:999px;
@@ -350,7 +350,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
 .kbd{font-family:var(--mono);font-size:0.75rem;border:1px solid var(--border-2);border-radius:5px;padding:2px 7px;color:var(--text-2);background:var(--surface)}
 .foot{margin-top:44px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:0.875rem;line-height:1.9}
 
-/* ================= responsive ================= */
+
 @media (max-width:1180px){
   .desktop-only{display:none!important}
   .app{grid-template-columns:minmax(0,1fr)}
@@ -449,7 +449,7 @@ mark{background:color-mix(in srgb,var(--brand) 22%,transparent);color:inherit;bo
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ===== v4: 入力フォーム ===== */
+
 .tbtn{display:flex;align-items:center;gap:9px;border:1px solid var(--border);background:var(--surface);border-radius:10px;padding:9px 14px;font-size:0.90625rem;color:var(--text-2);box-shadow:var(--shadow);transition:.13s;white-space:nowrap}
 .tbtn:hover{border-color:var(--border-2);color:var(--text)}
 .tbtn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;flex:none}
@@ -526,7 +526,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
 @media (max-width:700px){.tasklink span{display:none}}
 @media print{.tasklink{background:none;border-color:#bbb;color:#333}}
 
-/* ===== v4: 印刷 ===== */
+
 @media print{
   .pblock-h{position:static}
   :root{--bg:#fff;--surface:#fff;--surface-2:#fff;--surface-3:#f2f2f2;--text:#000;--text-2:#222;--muted:#555;--border:#bbb;--shadow:none;--shadow-lg:none}
@@ -675,10 +675,10 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
 <div class="toast" id="toast">コピーしました</div>
 
 <script>
-/* ===== 新規事業開発プレイブック 2026 : データ ===== */
+
 const DATA = {
 
-/* ---------------- 共通ルール ---------------- */
+
 common: {
   id: 'common', kind: 'common', no: 'BASE', name: '共通ルール', color: 'var(--common)',
   lead: 'このサイトは、新規事業の検討でそのまま使えるプロンプト集です。判断ゲートとチェックリストは、プロンプトを使う順番と、使い終わりの目安として置いています。検討の記録や意思決定そのものは、各社の様式で別に残してください。4ステップの骨格は2025年版から変えていません。変わったのは「AIへの渡し方」と「出てきたものの検品」です。',
@@ -742,10 +742,10 @@ common: {
   ]
 },
 
-/* ---------------- ステップ ---------------- */
+
 steps: [
 
-/* =========== STEP 1 =========== */
+
 {
   id: 's1', kind: 'step', no: 'STEP 01', name: 'アイデア創出と事業機会の発見', short: '探索', color: 'var(--s1)',
   purpose: '世の中の変化・顧客の課題と、自社の強みを掛け合わせ、事業の「種」を見つける。',
@@ -1102,7 +1102,7 @@ steps: [
   ]
 },
 
-/* =========== STEP 2 =========== */
+
 {
   id: 's2', kind: 'step', no: 'STEP 02', name: '市場調査と顧客理解', short: '検証', color: 'var(--s2)',
   purpose: 'アイデアの事業性を、客観的なデータと顧客の生の声で検証する。',
@@ -1370,7 +1370,7 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
   ]
 },
 
-/* =========== STEP 3 =========== */
+
 {
   id: 's3', kind: 'step', no: 'STEP 03', name: '事業コンセプトの具体化とビジネスモデル構築', short: '設計', color: 'var(--s3)',
   purpose: '「誰に、何を、どう提供して、どう儲けるか」という事業の骨格を設計する。',
@@ -1623,7 +1623,7 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
   ]
 },
 
-/* =========== STEP 4 =========== */
+
 {
   id: 's4', kind: 'step', no: 'STEP 04', name: '事業計画書作成とプレゼンテーション', short: '決裁', color: 'var(--s4)',
   purpose: '経営層が投資判断を下せる、具体的かつ定量的な計画書を完成させ、必要な経営資源の承認を得る。',
@@ -1819,10 +1819,10 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 },
 ],
 
-/* ---------------- 更新履歴 ---------------- */
+
 changelog: [
   { sec: 'v4.7（2026-08-24）の変更', items: [
-    { type:'upd', t:'講義後に公開する検討プロセス導線を追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、検討プロセスのプレビュー導線へ置き換えた。講義前はグレーアウトして無効化し、講義後に設定1か所で公開できる状態にした。', why:'講義中のネタバレを防ぎつつ、終了後は参加者が実際の検討と意思決定の往復を参照できるようにするため。' }
+    { type:'upd', t:'講義後に公開する検討プロセス導線を追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、検討プロセスのプレビュー導線へ置き換えた。講義前はグレーアウトし、講義後に公開する。', why:'講義中のネタバレを防ぎつつ、終了後は参加者が実際の検討と意思決定の往復を参照できるようにするため。' }
   ]},
   { sec: 'v4.6（2026-08-20）の変更', items: [
     { type:'upd', t:'スマホ表示を「概要／タスク／チェック」の3画面に分割', d:'900px未満では3つの固定タブで表示内容を切り替え、初期表示をタスクにした。既存の画面下部ナビゲーションはそのまま利用できる。', why:'長いチェックリストを通過しなくても、目的のタスクとプロンプトへすぐ移動できるようにするため。' },
@@ -1921,8 +1921,8 @@ sources: [
 
 </script>
 <script>
-/* ===== v4: 入力フォーム定義 ===== */
-/* COMMON: 一度入力すれば全プロンプトに反映される共通項目 */
+
+
 var COMMON_FIELDS = [
   { k: 'purpose', label: '今回の目的・決めたいこと', ph: '例：この事業に90日で300万円を投じるかを決めたい', long: true, grp: 1 },
   { k: 'reader', label: '読み手・判断者', ph: '例：事業部長とCFO', long: false, grp: 1 },
@@ -1935,7 +1935,7 @@ var COMMON_FIELDS = [
   { k: 'region', label: '対象地域', ph: '例：日本国内', long: false }
 ];
 
-/* GLOBAL: 全プロンプト共通で置き換える定型プレースホルダ [文字列, 共通項目キー] */
+
 var GLOBAL_MAP = [
   ['[検討内容を貼り付け。または「ここまでの会話で出たアイデアについて」]', 'theme'],
   ['[検討内容を貼り付け。または「ここまでの会話で出たアイデア」]', 'theme'],
@@ -1950,8 +1950,7 @@ var GLOBAL_MAP = [
   ['[製品名]', 'product']
 ];
 
-/* PROMPT_MAP: プロンプト個別 [文字列, キー, ラベル, 例, 長文か]
-   キーが共通項目と同じ場合は共通項目の値を使う（入力欄は出さない） */
+
 var PROMPT_MAP = {
   's1|1-1|0': [
     ['[ミッションを入力。例：小学生向けに大ヒットする玩具を企画する]', 'mission', '今回のミッション', '例：工場向けの新しい安全管理サービスを企画する', true],
@@ -2045,7 +2044,7 @@ var PROMPT_MAP = {
 
 </script>
 <script>
-/* ===== 最短ルート（必須項目） ===== */
+
 var CORE_TASKS = ["1-1","1-4","1-5","2-1","2-2","2-4","3-2","3-3","4-1","4-2"];
 var CORE_CHECKS = [
  "調査を通じて、追い風となるメガトレンドや将来の変化を特定できているか",
@@ -2086,8 +2085,8 @@ var CORE_CHECKS = [
 
 </script>
 <script>
-/* ===== 基本ルート：プロンプトの区分と、渡す共通情報の設計 ===== */
-/* lv: must=必須（必ず1本） / opt=選択（同じタスク内から1本） / ext=発展（時間があれば） */
+
+
 var PROMPT_LV = {
   's1|1-1|0': 'must', 's1|1-1|1': 'opt', 's1|1-1|2': 'opt',
   's1|1-2|0': 'must', 's1|1-2|1': 'ext',
@@ -2117,11 +2116,10 @@ var LV_HINT = {
   ext: '時間があれば実施します。基本ルートでは省略できます。'
 };
 
-/* 発展扱いの成果物（基本ルートでは非表示） */
+
 var EXT_OUTPUTS = ['AI検索での推薦状況レポート', '事前検死レポート'];
 
-/* 各プロンプトに渡す共通情報。ここに書いた項目だけが「前提情報」に入る。
-   本文中に差し込まれる項目は自動で追加される。 */
+
 var PROMPT_NEEDS = {
   's1|1-1|0': ['purpose', 'theme', 'region'],
   's1|1-1|1': ['purpose', 'theme'],
@@ -2156,7 +2154,7 @@ var PROMPT_NEEDS = {
 
 </script>
 <script>
-/* ===== チェック項目 → 対応タスク ===== */
+
 var CHECK_LINKS = {
  "調査を通じて、追い風となるメガトレンドや将来の変化を特定できているか": "1-1",
  "新トレンド・新法・規制緩和・技術革新など、事業機会に繋がる具体的変化をリストアップできているか": "1-1",
@@ -2225,15 +2223,8 @@ var CHECK_LINKS = {
 
 </script>
 <script>
-/* ===== 新規事業開発プレイブック 2026 v4.7 : 画面ロジック ===== */
 (function () {
   'use strict';
-
-  /* 講義後は enabled を true にするだけで、検討プロセスへのリンクが有効になります。 */
-  var PROCESS_PREVIEW = {
-    enabled: false,
-    url: 'https://toy-delta-lab-2026.protoplay.chatgpt.site/howto'
-  };
 
   var VIEWS = [DATA.common].concat(DATA.steps);
   var state = { view: DATA.common.id, checked: {}, open: {}, diff: false, q: '', vals: {}, task: null, route: true, mobileTab: 'tasks' };
@@ -2323,7 +2314,7 @@ var CHECK_LINKS = {
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
 
-  /* ---------- local save ---------- */
+
   var STORAGE_KEY = 'bd-playbook-2026-state-v1';
   var VALID_CHECKS = {};
   DATA.steps.forEach(function (st) {
@@ -2349,7 +2340,7 @@ var CHECK_LINKS = {
         });
       }
     } catch (err) {
-      /* localStorage が使えない環境でも、ページ内では通常どおり利用できる */
+
     }
   }
   function saveState() {
@@ -2364,7 +2355,7 @@ var CHECK_LINKS = {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, checked: checked, vals: vals }));
     } catch (err) {
-      /* 保存に失敗しても入力やチェック操作は止めない */
+
     }
   }
   function scheduleSave() {
@@ -2388,7 +2379,7 @@ var CHECK_LINKS = {
     return h + '</div>';
   }
 
-  /* ---------- index ---------- */
+
   function buildIndex() {
     var n = 0;
     DATA.common.blocks.forEach(function (b, i) {
@@ -2432,7 +2423,7 @@ var CHECK_LINKS = {
     return { total: total, done: done };
   }
 
-  /* ---------- sidebar ---------- */
+
   function ring(pct, color, label) {
     var r = 14, c = 2 * Math.PI * r;
     return '<span class="ring" style="--c:' + color + '">' +
@@ -2506,7 +2497,7 @@ var CHECK_LINKS = {
       }).join('') + '</div>';
   }
 
-  /* ---------- common view ---------- */
+
   function renderCommon() {
     var c = DATA.common;
     var h = '<div class="hero" style="--c:' + c.color + '">' +
@@ -2536,7 +2527,7 @@ var CHECK_LINKS = {
     return h;
   }
 
-  /* ---------- step view ---------- */
+
   function renderStep(st, idx) {
     var t = totals(st);
     var h = '<div class="hero" style="--c:' + st.color + '">' +
@@ -2553,7 +2544,7 @@ var CHECK_LINKS = {
     h += mobileViewTabs(st);
     h += '<div class="cols step-cols" data-mobile-active="' + state.mobileTab + '">';
 
-    /* left */
+
     h += '<div class="stack step-left" style="--c:' + st.color + '">';
     h += '<section class="card mobile-pane pane-overview"><div class="card-h"><h3>このステップのゴール</h3></div><div class="card-b">' +
       '<dl class="kv"><dt>GOAL</dt><dd>' + esc(st.goal) + '</dd></dl>' +
@@ -2594,7 +2585,7 @@ var CHECK_LINKS = {
     if (hiddenChk) h += '<div class="more-row"><button class="linkbtn" data-route="off">+ さらに ' + hiddenChk + ' 項目を表示</button></div>';
     h += '</section></div>';
 
-    /* right */
+
     h += '<div class="stack step-right mobile-pane pane-tasks" style="--c:' + st.color + '">' +
       '<section class="card"><div class="card-h"><h3>タスクとプロンプト</h3>' +
       '<span class="right" style="font-size:13.5px;color:var(--muted)">クリックで開く</span></div>' +
@@ -2626,7 +2617,7 @@ var CHECK_LINKS = {
     return h;
   }
 
-  /* ---------- search ---------- */
+
   function snip(text, q) {
     var i = text.toLowerCase().indexOf(q.toLowerCase());
     if (i < 0) return esc(text.slice(0, 100));
@@ -2654,7 +2645,7 @@ var CHECK_LINKS = {
     return h + '</div>';
   }
 
-  /* ---------- render ---------- */
+
   function render() {
     renderRail();
     renderMobileDock();
@@ -2665,7 +2656,7 @@ var CHECK_LINKS = {
     m.innerHTML = v.kind === 'common' ? renderCommon() : renderStep(v, idx);
   }
 
-  /* ---------- プロンプト組み立て ---------- */
+
   var M1 = '\u0011', M2 = '\u0012';
   function mapFor(pk) {
     var m = GLOBAL_MAP.map(function (e) { return { str: e[0], k: e[1] }; });
@@ -2748,7 +2739,7 @@ var CHECK_LINKS = {
       '</div>';
   }
 
-  /* ---------- drawer ---------- */
+
   function openTask(stepId, taskId) {
     var st = VIEWS.filter(function (x) { return x.id === stepId; })[0];
     if (!st || !st.tasks) return;
@@ -2809,22 +2800,12 @@ var CHECK_LINKS = {
     if (!$('#logModal').classList.contains('on')) $('#scrim').classList.remove('on');
   }
   function openLog() { $('#logModal').classList.add('on'); $('#scrim').classList.add('on'); $('.modal-b').scrollTop = 0; }
-  function configureProcessPreview() {
-    var btn = $('#processPreview');
-    if (!btn) return;
-    var disabled = !PROCESS_PREVIEW.enabled;
-    btn.disabled = disabled;
-    btn.setAttribute('aria-disabled', String(disabled));
-    btn.setAttribute('aria-label', disabled ? '検討プロセスは講義後に公開します' : '検討プロセスを別タブで開く');
-    var status = btn.querySelector('.preview-status');
-    if (status) status.textContent = disabled ? '講義後公開' : '公開中';
-  }
   function closeLog() {
     $('#logModal').classList.remove('on');
     if (!$('#drawer').classList.contains('on')) $('#scrim').classList.remove('on');
   }
 
-  /* ---------- changelog ---------- */
+
   function renderLog() {
     var h = '<p style="color:var(--text-2);font-size:15.5px;line-height:1.85;margin:18px 0 0">' +
       '2025年8月に作成したフローを、2026年8月時点の状況に合わせて更新した内容です。' +
@@ -2844,7 +2825,7 @@ var CHECK_LINKS = {
     $('#logBody').innerHTML = h;
   }
 
-  /* ---------- 入力の反映 ---------- */
+
   function refreshPreviews() {
     $$('pre[data-pre]').forEach(function (pre) {
       var k = pre.getAttribute('data-pre');
@@ -2912,7 +2893,7 @@ var CHECK_LINKS = {
     $('#fontBtn').setAttribute('title', '文字サイズ：' + FONT_STEPS[fontIdx].name);
   }
 
-  /* ---------- copy ---------- */
+
   var tTimer;
   function toast(m) {
     var t = $('#toast'); t.textContent = m; t.classList.add('on');
@@ -2943,7 +2924,7 @@ var CHECK_LINKS = {
     else toast('コピーできませんでした。手動で選択してください');
   }
 
-  /* ---------- events ---------- */
+
   document.addEventListener('click', function (e) {
     var el;
     if ((el = e.target.closest('[data-copy]'))) { var ck = el.getAttribute('data-copy'); copy(assemble(ck, PROMPTS[ck] || '', false), el); return; }
@@ -3000,10 +2981,6 @@ var CHECK_LINKS = {
     }
     if ((el = e.target.closest('[data-route]'))) { setRoute(false); toast('すべての項目を表示しています'); return; }
     if (e.target.closest('#fontBtn')) { setFont(fontIdx + 1); toast('文字サイズ：' + FONT_STEPS[fontIdx].name); return; }
-    if (e.target.closest('#processPreview') && PROCESS_PREVIEW.enabled) {
-      window.open(PROCESS_PREVIEW.url, '_blank', 'noopener,noreferrer');
-      return;
-    }
     if (e.target.closest('#openLog')) { openLog(); return; }
     if (e.target.closest('#logClose')) { closeLog(); return; }
     if (e.target === $('#logModal')) { closeLog(); return; }
@@ -3086,7 +3063,7 @@ var CHECK_LINKS = {
     if (e.key === '/' && !/^(INPUT|TEXTAREA)$/.test((document.activeElement || {}).tagName || '')) { e.preventDefault(); $('#q').focus(); $('#q').select(); }
   });
 
-  /* ---------- boot ---------- */
+
   restoreSavedState();
   try {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
@@ -3095,7 +3072,6 @@ var CHECK_LINKS = {
   buildIndex();
   renderLog();
   setFont(0);
-  configureProcessPreview();
   updatePjBtn();
   render();
   window.addEventListener('pagehide', saveState);
