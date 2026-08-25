@@ -152,6 +152,8 @@ main{padding:34px 32px 96px;max-width:1500px}
 .quickstart-step .num{display:block;font-family:var(--mono);font-size:0.6875rem;letter-spacing:.08em;color:var(--c);font-weight:700;margin-bottom:5px}
 .quickstart-step strong{display:block;font-size:0.9375rem;line-height:1.45;margin-bottom:4px}
 .quickstart-step p{margin:0;color:var(--text-2);font-size:0.8125rem;line-height:1.65}
+.quickstart-note{margin:12px 0 0;padding:11px 13px;border-radius:9px;background:color-mix(in srgb,var(--c) 8%,var(--surface));color:var(--text-2);font-size:0.875rem;line-height:1.75}
+.quickstart-note strong{color:var(--text)}
 .gate{
   margin-top:20px;display:flex;gap:14px;align-items:flex-start;max-width:860px;
   background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--c);
@@ -700,6 +702,7 @@ common: {
     { t: 'AIで実行', d: '必要な入力欄を埋め、できたプロンプトをコピーしてAIに渡します。' },
     { t: '人が検品', d: '出典・仮説・一次情報を確認し、チェック項目で抜けを点検します。' }
   ],
+  usageNote: 'プロンプト例はあくまで一例であり、内容を変えてはいけないものではありません。プロンプト作成の参考や、考える視点として、目的や状況に合わせて活用してください。',
   blocks: [
     {
       h: '① 「効くプロンプト」から「渡す情報の設計」へ',
@@ -1840,7 +1843,7 @@ Think（思っていること）／See（見ているもの）／Hear（耳に�
 
 changelog: [
   { sec: 'v4.8（2026-08-25）の変更', items: [
-    { type:'new', t:'共通ルールの冒頭に使い方を追加', d:'前提入力、基本ルート、AIでの実行、人による検品の4ステップを、共通ルールの見出し直下に表示した。', why:'初めて開いた受講者が、どこから始めて何をすればよいかを画面内だけで理解できるようにするため。' }
+    { type:'new', t:'共通ルールの冒頭に使い方を追加', d:'前提入力、基本ルート、AIでの実行、人による検品の4ステップと、プロンプト例は目的に合わせて変更できるという案内を表示した。', why:'初めて開いた受講者が操作の流れを理解し、例文を固定ルールとしてではなく思考の材料として活用できるようにするため。' }
   ]},
   { sec: 'v4.7（2026-08-24）の変更', items: [
     { type:'upd', t:'講義後に公開する検討プロセス導線を追加', d:'サイドメニューの「印刷 / PDF保存」を削除し、検討プロセスのプレビュー導線へ置き換えた。講義前はグレーアウトし、講義後に公開する。', why:'講義中のネタバレを防ぎつつ、終了後は参加者が実際の検討と意思決定の往復を参照できるようにするため。' }
@@ -2530,7 +2533,8 @@ var CHECK_LINKS = {
       '<ol class="quickstart-steps">' + c.usage.map(function (item, i) {
         return '<li class="quickstart-step"><span class="num">0' + (i + 1) + '</span>' +
           '<strong>' + esc(item.t) + '</strong><p>' + esc(item.d) + '</p></li>';
-      }).join('') + '</ol></section></div>';
+      }).join('') + '</ol><p class="quickstart-note"><strong>使い方のポイント：</strong>' +
+      esc(c.usageNote) + '</p></section></div>';
 
     h += '<div class="cols" style="--c:' + c.color + '"><div class="stack">';
     var half = Math.ceil(c.blocks.length / 2);
