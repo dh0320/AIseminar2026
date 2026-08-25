@@ -96,6 +96,9 @@ html[data-theme="dark"] .brand-dot{color:#08201D}
   color:var(--muted);background:var(--surface-2);border-color:var(--border);opacity:.62;cursor:not-allowed;
 }
 .process-preview:disabled:hover{color:var(--muted);background:var(--surface-2);border-color:var(--border)}
+.process-preview.live{color:var(--text);border-color:color-mix(in srgb,var(--brand) 46%,var(--border));background:color-mix(in srgb,var(--brand) 7%,var(--surface))}
+.process-preview.live:hover{color:var(--brand);border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,var(--surface))}
+.process-preview.live .preview-status{color:var(--brand);background:color-mix(in srgb,var(--brand) 14%,var(--surface-3))}
 
 
 .top{
@@ -578,7 +581,7 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         <span class="brand-dot">BD</span>
         <h1>新規事業開発<br>プレイブック</h1>
       </div>
-      <div class="sub">v4.8 ／ 2026-08 更新</div>
+      <div class="sub">v4.9 ／ 2026-08 更新</div>
     </div>
     <div class="nav-label">工程</div>
     <nav class="stages" id="rail" aria-label="工程"></nav>
@@ -594,11 +597,11 @@ html[data-theme="dark"] .tasklink:hover{color:#0D131B}
         </button>
       </div>
       <div class="preview-actions">
-        <button class="ghost process-preview" id="processPreview" type="button" disabled aria-disabled="true" aria-label="検討プロセスは講義後に公開します">
-          <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <a class="ghost process-preview live" id="processPreview" href="https://toy-delta-lab-2026.protoplay.chatgpt.site/howto" target="_blank" rel="noopener noreferrer" aria-label="検討の例を別タブで開く">
+          <svg viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
           <span>検討の例を見る</span>
-          <span class="preview-status">講義後公開</span>
-        </button>
+          <span class="preview-status">公開中</span>
+        </a>
       </div>
     </div>
   </aside>
@@ -1873,7 +1876,8 @@ steps: [
 
 changelog: [
   { sec: 'v4.9（2026-08-25）の変更', items: [
-    { type:'upd', t:'意思決定に直結する6本のプロンプトを簡素化・再設計', d:'アイデア評価、市場規模、ニーズ調査、ペルソナ、顧客インタビュー、事業計画を更新。根拠のない点数や頻度、利用できない情報源へのアクセス前提、架空の人物像、一括生成による一般論の補完を抑える構成にした。', why:'最新モデルでは強い役割表現や長い指示より、目的・利用可能な情報・判断基準・停止条件を明確にした方が、出力の再現性と検品可能性が高いため。' }
+    { type:'upd', t:'意思決定に直結する6本のプロンプトを簡素化・再設計', d:'アイデア評価、市場規模、ニーズ調査、ペルソナ、顧客インタビュー、事業計画を更新。根拠のない点数や頻度、利用できない情報源へのアクセス前提、架空の人物像、一括生成による一般論の補完を抑える構成にした。', why:'最新モデルでは強い役割表現や長い指示より、目的・利用可能な情報・判断基準・停止条件を明確にした方が、出力の再現性と検品可能性が高いため。' },
+    { type:'upd', t:'講義終了後に検討プロセスの例を公開', d:'サイドメニューの「検討の例を見る」を有効化し、今回の玩具企画におけるAIと人の検討過程を別タブで閲覧できるようにした。', why:'講義後に、受講者が成果物だけでなく検討と意思決定の往復を振り返れるようにするため。' }
   ]},
   { sec: 'v4.8（2026-08-25）の変更', items: [
     { type:'new', t:'共通ルールの冒頭に使い方を追加', d:'前提入力、基本ルート、AIでの実行、人による検品の4ステップと、プロンプト例は目的に合わせて変更できるという案内を表示した。', why:'初めて開いた受講者が操作の流れを理解し、例文を固定ルールとしてではなく思考の材料として活用できるようにするため。' }
